@@ -1,2 +1,2 @@
 # SumTwoStrings
-Sum two strings that taken as a integer can be infinite digit
+Sums two strings that taken as a integer can be infinite digit
