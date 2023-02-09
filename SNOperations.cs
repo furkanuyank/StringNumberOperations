@@ -143,7 +143,31 @@ public static class SNOperations
         return 0;
     }
 
+    //it takes two string numbers, and return mod of first one to second one.
+    public static string mod(string string1, string string2)
+    {
+        //check if strings that taken as a parameters are number.
+        if (!(chechIfNumber(string1) && chechIfNumber(string2)))
+        {
+            throw new FormatException("Both of strings need to be number format.");
+        }
 
+        string num1 = string1;
+        string num2 = string2;
+        string currentProduct = "0";
+        while (compare(currentProduct, num1) < 0)
+        {
+            currentProduct = summation(currentProduct, num2);
+        }
+        string result = extraction(num1, extraction(currentProduct, num2));
+
+        if (compare(result, num2) == 0)
+        {
+            return "0";
+        }
+        return result;
+    }
+    
     //it trims zeros at the beginning of number.
     //if the number ful of zero then it return only 0.
     public static string fixZeros(string number)
