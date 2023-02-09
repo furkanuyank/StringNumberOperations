@@ -15,7 +15,7 @@ public static class SNOperations
         return true;
     }
 
-    //it takes two string numbers, compares them and return which is smaller one.
+    //it takes two string numbers, compares them and return which is lesser one.
     //if string numbers are equal, returns it.
     public static string min(string string1, string string2)
     {
@@ -42,7 +42,7 @@ public static class SNOperations
                 num1 = "0" + num1;
             }
         }
-        //then, it compares numbers digit by digit to find out whic is smaller.
+        //then, it compares numbers digit by digit to find out whic is lesser.
         for (int i = 0; i < string1.Length; i++)
         {
             if (num1[i] < num2[i])
@@ -57,7 +57,7 @@ public static class SNOperations
         return string1;
     }
 
-    //it takes two string numbers, compares them and return which is bigger one.
+    //it takes two string numbers, compares them and return which is greater one.
     //if string numbers are equal, returns it.
     public static string max(string string1, string string2)
     {
@@ -84,7 +84,7 @@ public static class SNOperations
                 num1 = "0" + num1;
             }
         }
-        //then, it compares numbers digit by digit to find out whic is smaller.
+        //then, it compares numbers digit by digit to find out whic is lesser.
         for (int i = 0; i < string1.Length; i++)
         {
             if (num1[i] > num2[i])
@@ -98,6 +98,51 @@ public static class SNOperations
         }
         return string1;
     }
+
+    //it takes two string numbers, compares them and return
+    //1 if first parameter greater than other
+    //-1 if first parameter lesser than
+    //0 if both string numbers are equal
+    public static int compare(string string1, string string2)
+    {
+        //check if strings that taken as a parameters are number.
+        if (!(chechIfNumber(string1) && chechIfNumber(string2)))
+        {
+            throw new FormatException("Both of strings need to be number format.");
+        }
+
+        string num1 = string1;
+        string num2 = string2;
+        // firstly, it makes equal length of both numbers.
+        if (string1.Length > string2.Length)
+        {
+            for (int i = 0; i < string1.Length - string2.Length; i++)
+            {
+                num2 = "0" + num2;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < string2.Length - string1.Length; i++)
+            {
+                num1 = "0" + num1;
+            }
+        }
+        //then, it compares numbers digit by digit to find out which is lesser, greater or equal.
+        for (int i = 0; i < string1.Length; i++)
+        {
+            if (num1[i] > num2[i])
+            {
+                return 1;
+            }
+            else if (num1[i] < num2[i])
+            {
+                return -1;
+            }
+        }
+        return 0;
+    }
+
 
     //it trims zeros at the beginning of number.
     //if the number ful of zero then it return only 0.
@@ -124,7 +169,7 @@ public static class SNOperations
         string num2 = string2;
         string equal = "";
 
-        //swaps strings if first one has higher length
+        //swaps strings if first one has greater length
         if (num1.Length > num2.Length)
         {
             string temp = num1;
@@ -132,7 +177,7 @@ public static class SNOperations
             num2 = temp;
         }
         //get lenght differences between two strings
-        //put 0 at the beginning of the smaller one
+        //put 0 at the beginning of the lesser one
         int fark = num2.Length - num1.Length;
         for (int i = 0; i < fark; i++)
         {
@@ -257,7 +302,7 @@ public static class SNOperations
                 num1 = "0" + num1;
             }
         }
-        //swaps if first string number that taken is lower than other.
+        //swaps if first string number that taken is lesser than other.
         if (min(num1, num2) == num1)
         {
             string temp = num2;
