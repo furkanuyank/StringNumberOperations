@@ -311,6 +311,12 @@ public static class SNOperations
         string num2 = string2;
         string result = "";
 
+        //retruns zero if both numbers are equal
+        if (compare(num1, num2) == 0)
+        {
+            return "0";
+        }
+        
         // it makes equal length of both numbers.
         if (string1.Length > string2.Length)
         {
