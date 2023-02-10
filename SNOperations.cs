@@ -386,4 +386,61 @@ public static class SNOperations
         }
         return fixZeros(result);
     }
+    
+    //division two string numbers as a x,xxxxx format if fractional side can't be lesser digit.
+    public static string division(string string1, string string2)
+    {
+        //check if strings that taken as a parameters are number.
+        if (!(chechIfNumber(string1) && chechIfNumber(string2)))
+        {
+            throw new FormatException("Both of strings need to be number format.");
+        }
+
+        string num1 = string1;
+        string num2 = string2;
+        string currentProduct = "0";
+        string exactResult = "0";
+
+        //calculate exact result if it will be differ than zero.
+        if (compare(num1, num2) == 1)
+        {
+            while (compare(currentProduct, num1) < 0)
+            {
+                currentProduct = summation(currentProduct, num2);
+                exactResult = summation(exactResult, "1");
+            }
+            exactResult = extraction(exactResult, "1");
+        }
+
+        //return only exact result if mod of first number to second one is equal to zero.
+        string remaining = mod(num1, num2);
+        if (compare(remaining, "0") == 0)
+        {
+            return summation(exactResult, "1");
+        }
+
+        //it calculates fractional result.
+        string fraction = "0";
+        string rest = "0";
+        while (true)
+        {
+            rest = summation(rest, "1");
+            fraction = summation(fraction, num2);
+            if (compare(fraction, "100000") > 0)
+            {
+                rest = extraction(rest, "1");
+                break;
+            }
+        }
+
+        //it puts 0 to beginning of the fracational result if it needed.
+        string fractionalResult = multiplication(rest, remaining);
+        int zeroLength = 5 - fractionalResult.Length;
+        for (int i = 0; i < zeroLength; i++)
+        {
+            fractionalResult = "0" + fractionalResult;
+        }
+
+        return exactResult + "," + fractionalResult.TrimEnd('0'); ;
+    }
 }
